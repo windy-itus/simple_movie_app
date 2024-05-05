@@ -23,9 +23,10 @@ class MoviesRepository(private val apiKey: String) {
             ApiServiceManager.tMDBApiService?.let { apiService ->
                 val response = apiService.getTrendingMovies(apiKey, pageNumber)
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        MovieDatabaseWrapper.insertMovies(it)
-                        return it.results
+                    response.body()?.let { movie ->
+                        val updatedMovie = movie.copy(cachedAt = System.currentTimeMillis())
+                        MovieDatabaseWrapper.insertMovies(updatedMovie)
+                        return updatedMovie.results
                     }
                 }
             }
@@ -61,10 +62,12 @@ class MoviesRepository(private val apiKey: String) {
             // Fetch data from cloud
             ApiServiceManager.tMDBApiService?.let { apiService ->
                 val response = apiService.getMovieDetails(movieId, apiKey)
+
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        MovieDatabaseWrapper.insertMovieDetails(it)
-                        return it
+                    response.body()?.let { details ->
+                        val updatedDetails = details.copy(cachedAt = System.currentTimeMillis())
+                        MovieDatabaseWrapper.insertMovieDetails(updatedDetails)
+                        return updatedDetails
                     }
                 }
             }
