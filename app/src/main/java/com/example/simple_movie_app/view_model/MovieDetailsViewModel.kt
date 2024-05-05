@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(private val repository: MoviesRepository) : ViewModel() {
+open class MovieDetailsViewModel(private val repository: MoviesRepository) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState<MovieDetails?>>(UiState.Loading)
-    val uiState: StateFlow<UiState<MovieDetails?>> = _uiState.asStateFlow()
+    open val uiState: StateFlow<UiState<MovieDetails?>> = _uiState.asStateFlow()
 
     fun fetchMovieDetails(movieId: Int) {
         _uiState.value = UiState.Loading  // Set loading state

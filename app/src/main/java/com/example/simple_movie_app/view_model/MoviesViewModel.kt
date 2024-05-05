@@ -19,18 +19,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 
-class MoviesViewModel(private val repository: MoviesRepository) : ViewModel() {
+open class MoviesViewModel(private val repository: MoviesRepository) : ViewModel() {
     private val searchQuery = MutableStateFlow("")
 
-    val query = searchQuery.asStateFlow()
-    val isSearching: LiveData<Boolean> = searchQuery.map { it.isNotEmpty() }.asLiveData()
+    open val query = searchQuery.asStateFlow()
+    open val isSearching: LiveData<Boolean> = searchQuery.map { it.isNotEmpty() }.asLiveData()
 
     fun updateSearchQuery(query: String) {
         searchQuery.value = query
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val movies: Flow<PagingData<Movie>> = searchQuery.flatMapLatest { query ->
+    open val movies: Flow<PagingData<Movie>> = searchQuery.flatMapLatest { query ->
         if (query.isEmpty()) {
             Pager(
                 PagingConfig(pageSize = 20, enablePlaceholders = false),
