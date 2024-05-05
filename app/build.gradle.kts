@@ -109,6 +109,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:$recyclerviewVersion")
 
     implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.navigation:navigation-testing:2.7.7")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
 
@@ -131,7 +132,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.room:room-testing:2.6.1")
-    androidTestImplementation("org.mockito:mockito-android:4.3.1")
+    androidTestImplementation("org.mockito:mockito-android:5.11.0")
+    androidTestImplementation("org.mockito:mockito-core:5.1.1")
+
+
 
     // Debug dependencies
     debugImplementation("androidx.compose.ui:ui-tooling")
