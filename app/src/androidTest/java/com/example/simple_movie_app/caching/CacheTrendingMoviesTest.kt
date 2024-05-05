@@ -1,8 +1,9 @@
-package com.example.simple_movie_app
+package com.example.simple_movie_app.caching
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.simple_movie_app.GlobalVariables
 import com.example.simple_movie_app.data.repository.MoviesRepository
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.runBlocking
